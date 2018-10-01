@@ -1,0 +1,29 @@
+{
+  "name": "jeffersonlam.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffersonlam/jeffersonlam.com.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeffersonlam/jeffersonlam.com/issues"
+  },
+  "homepage": "https://github.com/jeffersonlam/jeffersonlam.com#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "browser-sync": "^2.24.5",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-sass": "^4.0.1",
+    "reset-css": "^4.0.1"
+  }
+}
