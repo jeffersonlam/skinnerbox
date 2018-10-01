@@ -1,41 +1,30 @@
 // ========
 // Globals
 // ========
-var box = document.getElementById('box');
+const box = document.getElementById('box');
 box.addEventListener('click', clickBox);
-var moneyDisplay = document.getElementById('money');
-var achievementsList = document.getElementById('achievements-list');
-/*var shopIcon = document.getElementsByClassName('shop-icon')[0];
+const moneyDisplay = document.getElementById('money');
+const achievementsList = document.getElementById('achievements-list');
+const shopIcon = document.getElementsByClassName('shop-icon')[0];
 shopIcon.addEventListener('click', clickShopIcon);
-var catalogItems = document.getElementsByClassName('catalog-item');
-for (var i = 0; i < catalogItems.length; i++) {
-  catalogItems[i].addEventListener('click', clickCatalogItem);
-}
-var buyBtn = document.getElementById('buy-btn');
-buyBtn.addEventListener('click', buyItem);*/
-var animation = 'shake';
-var counter = 0;
-var money = 0;
-var achievements = [
-/*  {
-    title: 'An achievement',
-    clicks: 1
-  },
-  {
-    title: 'An achievement',
-    clicks: 3
-  },
-  {
-    title: 'An achievement',
-    clicks: 5
-  },*/
+const catalogItems = document.getElementsByClassName('catalog-item');
+[...catalogItems].forEach(item => {
+  item.addEventListener('click', clickCatalogItem);
+});
+const buyBtn = document.getElementById('buy-btn');
+buyBtn.addEventListener('click', buyItem);
+let animation = 'shake';
+let counter = 0;
+let money = 0;
+let achievements = [
   {
     title: 'What\'s A Skinner Box?',
     clicks: 10
   },
   {
     title: 'The Conditioning Begins',
-    clicks: 75},
+    clicks: 75
+  },
   {
     title: 'Nothing Beats Watching Numbers Go Up',
     clicks: 150
@@ -117,48 +106,50 @@ achievements = buildAchievementCards(achievements);
 // ========
 
 // Parses box click
-function clickBox(evt) {
+function clickBox(e) {
   counter++;
   money++;
-  var el = evt.target;
-  var newEl = el.cloneNode(true);
+  const el = e.target;
+  const newEl = el.cloneNode(true);
   newEl.className = "box " + animation;
   newEl.addEventListener('click', clickBox);
   el.parentNode.replaceChild(newEl, el);
   animation = (animation == 'shake' ? 'shake2' : 'shake');
   moneyDisplay.innerHTML = money;
 
-  displayPopup(evt.clientX, evt.clientY);
+  displayPopup(e.clientX, e.clientY);
 
   checkCounter();
-//  checkSelectedShopItem();
+  checkSelectedShopItem();
 }
 
 function displayPopup(mouseX, mouseY) {
-  var popup = document.createElement('div');
+  const popup = document.createElement('div');
   popup.classList.add('popup');
   popup.style.top = mouseY - 40 + "px";
   popup.style.left = mouseX - 20 + "px";
 
-  var text = document.createElement('div');
+  const text = document.createElement('div');
   text.innerHTML = "+1";
-  var random = Math.floor(Math.random() * 10) - 5;
+  const random = Math.floor(Math.random() * 10) - 5;
   text.style.transform = "rotate(" + random + "deg) translatex(" + random + "px)";
 
   popup.appendChild(text);
   document.body.appendChild(popup);
 
   setTimeout(function() {
-    var parent = popup.parentNode;
+    const parent = popup.parentNode;
     parent.removeChild(popup);
   }, 500)
 }
 
 // Checks counter for achievements criteria
 function checkCounter() {
-  for (var i = 0; i < achievements.length; i++) {
-    if (counter == achievements[i].clicks)
-       displayAchievement(achievements[i].card);
+  for (const achievement of achievements) {
+    if (counter == achievement.clicks){
+      displayAchievement(achievement.card);
+      return;
+    }
   }
 }
 
@@ -181,7 +172,7 @@ function displayAchievement(achievementCard) {
 
       //Remove achievement node
       setTimeout(function() {
-        var parent = achievementCard.parentNode;
+        const parent = achievementCard.parentNode;
         parent.removeChild(achievementCard);
       }, 1000);
     }, 600);
@@ -190,24 +181,23 @@ function displayAchievement(achievementCard) {
 
 // Builds achievement cards for achievement array
 function buildAchievementCards(achievements) {
-  for (var i = 0; i < achievements.length; i++) {
-    var card = buildCard(achievements[i].title);
-    achievements[i].card = card;
-  }
+  achievements.forEach(achievement => {
+    achievement.card = buildCard(achievement.title);
+  });
   return achievements;
-};
+}
 
 // Creates HTML for achievement card
 function buildCard(title) {
-  var card = document.createElement('li');
+  const card = document.createElement('li');
   card.classList.add('achievement-card');
-  var content = document.createElement('div');
+  const content = document.createElement('div');
   content.classList.add('content');
-  var heading = document.createElement('h5');
+  const heading = document.createElement('h5');
   heading.innerHTML = "Achievement unlocked!";
-  var body = document.createElement('h4');
+  const body = document.createElement('h4');
   body.innerHTML = title;
-  var img = document.createElement('img');
+  const img = document.createElement('img');
   img.src = 'http://lorempixel.com/75/75/animals/?' + Math.floor(Math.random() * 1000);
 
   content.appendChild(img);
@@ -218,32 +208,32 @@ function buildCard(title) {
   return card;
 }
 
-function clickShopIcon(evt) {
-  var el = evt.target;
-  var shopWrapper = el.parentNode;
+function clickShopIcon(e) {
+  const shopWrapper = e.target.parentNode;
   shopWrapper.classList.toggle('active');
 }
 
-function clickCatalogItem(evt) {
-  var el = evt.target;
+function clickCatalogItem(e) {
+  const el = e.target;
   if (el.classList.contains('active')) return;
-  var catalogWrapper = el.parentNode;
-  for (var i = 0; i < catalogWrapper.children.length; i++) {
-    catalogWrapper.children[i].classList.remove('active');
-  }
+  const catalogWrapper = el.parentNode;
+  [...catalogWrapper.children].forEach(item => {
+    item.classList.remove('active');
+  });
   el.classList.add('active');
 
   checkSelectedShopItem();
 }
 
 function checkSelectedShopItem() {
-  var active = null;
-  for (var i = 0; i < catalogItems.length; i++) {
-    if (catalogItems[i].classList.contains('active'))
-      active = catalogItems[i];
-  }
+  let active = null;
+  [...catalogItems].forEach(item => {
+    if (item.classList.contains('active'))
+      active = item;
+  });
+  if (!active) return;
 
-  var price = active.dataset.price;
+  const price = active.dataset.price;
   if (price <= money) {
     buyBtn.disabled = false;
   } else {
@@ -252,9 +242,12 @@ function checkSelectedShopItem() {
 }
 
 function buyItem() {
-  for (var i = 0; i < catalogItems.length; i++) {
-    if (catalogItems[i].classList.contains('active'))
-      active = catalogItems[i];
+  let active = null;
+  for (const item of catalogItems) {
+    if (item.classList.contains('active')) {
+      active = item;
+      break;
+    }
   }
   console.log('Thatll be $' + active.dataset.price);
   money -= active.dataset.price;
