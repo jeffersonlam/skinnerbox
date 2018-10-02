@@ -13,6 +13,7 @@ const catalogItems = document.getElementsByClassName('catalog-item');
 });
 const buyBtn = document.getElementById('buy-btn');
 buyBtn.addEventListener('click', buyItem);
+let activeShopItem = null;
 let animation = 'shake';
 let counter = 0;
 let money = 0;
@@ -120,7 +121,7 @@ function clickBox(e) {
   displayPopup(e.clientX, e.clientY);
 
   checkCounter();
-  checkSelectedShopItem();
+  checkItemPrice();
 }
 
 function displayPopup(mouseX, mouseY) {
@@ -214,26 +215,23 @@ function clickShopIcon(e) {
 }
 
 function clickCatalogItem(e) {
-  const el = e.target;
-  if (el.classList.contains('active')) return;
-  const catalogWrapper = el.parentNode;
-  [...catalogWrapper.children].forEach(item => {
-    item.classList.remove('active');
-  });
-  el.classList.add('active');
+  // Remove .active and return
+  if (e.target == activeShopItem) {
+    activeShopItem.classList.remove('active');
+    activeShopItem = null;
+    return;
+  }
 
-  checkSelectedShopItem();
+  // Else, add active onto what was clicked
+  activeShopItem = e.target;
+  activeShopItem.classList.add('active');
+
+  checkItemPrice();
 }
 
-function checkSelectedShopItem() {
-  let active = null;
-  [...catalogItems].forEach(item => {
-    if (item.classList.contains('active'))
-      active = item;
-  });
-  if (!active) return;
-
-  const price = active.dataset.price;
+function checkItemPrice() {
+  if (!activeShopItem) return;
+  const price = activeShopItem.dataset.price;
   if (price <= money) {
     buyBtn.disabled = false;
   } else {
@@ -242,17 +240,10 @@ function checkSelectedShopItem() {
 }
 
 function buyItem() {
-  let active = null;
-  for (const item of catalogItems) {
-    if (item.classList.contains('active')) {
-      active = item;
-      break;
-    }
-  }
-  console.log('Thatll be $' + active.dataset.price);
-  money -= active.dataset.price;
+  console.log('Thatll be $' + activeShopItem.dataset.price);
+  money -= activeShopItem.dataset.price;
   moneyDisplay.innerHTML = money;
 
   checkCounter();
-  checkSelectedShopItem();
+  checkItemPrice();
 }
