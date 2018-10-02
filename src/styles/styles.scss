@@ -152,6 +152,10 @@ $width--shop-icon: 50px;
 
   will-change: transform;
 
+  h1 {
+    margin-top: 0;
+  }
+
   &.active {
     transform: translatex($width--shop);
   }
