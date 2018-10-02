@@ -215,22 +215,20 @@ function clickShopIcon(e) {
 }
 
 function clickCatalogItem(e) {
-  // Remove .active and return
+  if (activeShopItem) activeShopItem.classList.remove('active');
   if (e.target == activeShopItem) {
-    activeShopItem.classList.remove('active');
     activeShopItem = null;
-    return;
+  } else {
+    activeShopItem = e.target;
+    activeShopItem.classList.add('active');
   }
-
-  // Else, add active onto what was clicked
-  activeShopItem = e.target;
-  activeShopItem.classList.add('active');
 
   checkItemPrice();
 }
 
 function checkItemPrice() {
   if (!activeShopItem) return;
+
   const price = activeShopItem.dataset.price;
   if (price <= money) {
     buyBtn.disabled = false;
