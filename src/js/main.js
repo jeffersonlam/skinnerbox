@@ -161,23 +161,22 @@ function displayAchievement(achievementCard) {
   //Display achievement
   achievementCard.classList.add('popIn');
 
-  //Hide achievement
-  setTimeout(function() {
-    achievementCard.classList.remove('popIn');
-    achievementCard.classList.add('popOut');
-
-    // Minimize achievement
-    setTimeout(function() {
-      achievementCard.classList.remove('popOut');
+  wait(6000)
+    .then(() => {
+      achievementCard.classList.add('popOut');
+      return wait(600);
+    })
+    .then(() => {
       achievementCard.classList.add('minimizeOut');
+      return wait(1000);
+    })
+    .then(() => {
+      achievementCard.parentNode.removeChild(achievementCard);
+    });
+}
 
-      //Remove achievement node
-      setTimeout(function() {
-        const parent = achievementCard.parentNode;
-        parent.removeChild(achievementCard);
-      }, 1000);
-    }, 600);
-  }, 6000);
+function wait(time) {
+  return new Promise(res => setTimeout(() => res(), time));
 }
 
 // Builds achievement cards for achievement array
