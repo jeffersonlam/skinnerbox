@@ -1,6 +1,3 @@
-console.log('asdf');
-
-
 // ========
 // Globals
 // ========
