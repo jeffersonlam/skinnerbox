@@ -69,46 +69,59 @@ body {
 
 #achievements-list {
   position: fixed;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 10px;
 
   margin: 0;
   padding: 0;
 }
 
-.achievement-card {
-  padding-bottom: 15px;
+.achievement-container {
+  margin-bottom: 10px;
 
   list-style: none;
 
   opacity: 0;
+}
+
+.achievement-card {
+  display: flex;
+
+  width: 350px;
+  height: 100px;
+  padding: 10px;
+
+  border-radius: 50px;
+  background-color: $color--primary;
+
+  img {
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+  }
 
   .content {
-    box-sizing: border-box;
-    width: 350px;
-    height: 100px;
-    padding: 12px;
+    display: flex;
+    flex-direction: column;
 
-    transition: all 1s;
+    margin-left: 10px;
 
     color: #212121;
-    background-color: $color--primary;
-
-    img {
-      float: left;
-    }
 
     h5 {
+      font-size: 1rem;
       font-weight: 100;
 
-      margin: 0 0 10px 85px;
+      margin: 0;
     }
 
     h4 {
       font-family: 'Avenir';
+      font-size: 1rem;
       font-weight: 500;
 
-      margin: 0 0 0 85px;
+      margin: 5px 0 0 0;
     }
   }
 }
@@ -183,13 +196,12 @@ $width--shop-icon: 50px;
   .shop-item-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 
     margin: 0;
     padding: 0;
 
     list-style: none;
-    justify-content: space-between;
-
 
     li {
       font-size: 1.25rem;
@@ -205,12 +217,12 @@ $width--shop-icon: 50px;
       user-select: none;
       transition: all 300ms -125ms;
 
-      background-color: #e5e5e5;
+      background-color: #eee;
 
       &.active {
         transform: scale(1.05, 1.05);
 
-        background-color: #f5f5f5;
+        background-color: #fff;
       }
 
       &:hover {

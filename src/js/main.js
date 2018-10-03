@@ -191,24 +191,21 @@ function wait(time) {
 // Builds achievement cards for achievement array
 function buildAchievementCards(achievements) {
   achievements.forEach(achievement => {
-    achievement.card = buildCard(achievement);
+    const container = document.createElement('li');
+    container.classList.add('achievement-container');
+    container.innerHTML = `
+    <div class="achievement-card">
+      <img src="https://placeimg.com/80/80/animals"/>
+      <div class="content">
+        <h5>Achievement unlocked!</h5>
+        <h4>${achievement.title}</h4>
+      </div>
+    </div>
+    `;
+
+    achievement.card = container;
   });
   return achievements;
-}
-
-// Creates HTML for achievement card
-function buildCard(achievement) {
-  const card = document.createElement('li');
-  card.classList.add('achievement-card');
-  card.innerHTML = `
-    <div class="content">
-      <img src="https://placeimg.com/75/75/animals" />
-      <h5>Achievement unlocked!</h5>
-      <h4>${achievement.title}</h4>
-    </div>
-  `;
-
-  return card;
 }
 
 function clickShopIcon(e) {
