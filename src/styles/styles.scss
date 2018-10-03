@@ -61,7 +61,7 @@ body {
 // "HUD"
 
 .hud {
-  margin-top: 40px;
+  margin-top: 25px;
 }
 
 // ===
@@ -123,7 +123,7 @@ body {
   position: fixed;
 
   user-select: none;
-  animation: hoverUp .5s forwards;
+  animation: hoverUp forwards;
 
   -webkit-text-fill-color: white;
   -webkit-text-stroke-width: .5px;
@@ -181,19 +181,20 @@ $width--shop-icon: 50px;
   }
 
   .catalog {
+    display: flex;
+    flex-wrap: wrap;
+
     margin: 0;
     padding: 0;
 
     list-style: none;
 
     li {
-      float: left;
-
       width: 65px;
       height: 65px;
       margin: 0 8px 8px 0;
 
-      transition: transform 200ms, background-color 10ms;
+      transition: all 300ms -125ms;
 
       background-color: #ddd;
 
@@ -222,17 +223,25 @@ $width--shop-icon: 50px;
     display: block;
 
     margin: 0 0 0 auto;
-    padding: 5px 15px;
+    padding: .5rem 1.25rem;
 
     border: 0;
+    border-bottom: 2px solid mix($color--primary, #000, 85%);
     background-color: $color--primary;
 
     &:disabled {
+      border-bottom: 2px solid rgba(#000, .15);
       background-color: #ddd;
     }
 
     &:hover {
       cursor: pointer;
+    }
+
+    &:active {
+      margin-top: 2px;
+
+      border: 0;
     }
   }
 }

@@ -118,30 +118,31 @@ function clickBox(e) {
   animation = (animation == 'shake' ? 'shake2' : 'shake');
   moneyDisplay.innerHTML = money;
 
-  displayPopup(e.clientX, e.clientY);
+  displayPopup('+1', e.clientX, e.clientY, 500);
 
   checkCounter();
   checkItemPrice();
 }
 
-function displayPopup(mouseX, mouseY) {
+function displayPopup(text, mouseX, mouseY, ms) {
   const popup = document.createElement('div');
   popup.classList.add('popup');
+  popup.style.animationDuration = `${ms}ms`;
   popup.style.top = mouseY - 40 + "px";
   popup.style.left = mouseX - 20 + "px";
 
-  const text = document.createElement('div');
-  text.innerHTML = "+1";
+  const textElement = document.createElement('div');
+  textElement.innerHTML = text;
   const random = Math.floor(Math.random() * 10) - 5;
-  text.style.transform = "rotate(" + random + "deg) translatex(" + random + "px)";
+  textElement.style.transform = "rotate(" + random + "deg) translatex(" + random + "px)";
 
-  popup.appendChild(text);
+  popup.appendChild(textElement);
   document.body.appendChild(popup);
 
   setTimeout(function() {
     const parent = popup.parentNode;
     parent.removeChild(popup);
-  }, 500)
+  }, ms)
 }
 
 // Checks counter for achievements criteria
@@ -236,11 +237,11 @@ function checkItemPrice() {
   }
 }
 
-function buyItem() {
-  console.log('Thatll be $' + activeShopItem.dataset.price);
+function buyItem(e) {
   money -= activeShopItem.dataset.price;
   moneyDisplay.innerHTML = money;
 
+  displayPopup(`-$${activeShopItem.dataset.price}`, e.clientX, e.clientY, 1000);
   checkCounter();
   checkItemPrice();
 }
