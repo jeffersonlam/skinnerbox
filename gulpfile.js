@@ -31,11 +31,8 @@ gulp.task('html:watch', function() {
 
 gulp.task('js', function() {
   gulp.src('./src/js/*.js')
-    .pipe(babel({
-      presets: ['@babel/preset-env']
-    }))
-    .pipe(gulp.dest('dist'))
-    .pipe(reload({stream:true}));
+    .pipe(reload({stream:true}))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('js:watch', function() {
