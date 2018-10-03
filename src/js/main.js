@@ -9,14 +9,32 @@ const shopIcon = document.getElementsByClassName('shop-icon')[0];
 const shopItemList = document.querySelector('.shop-item-list');
 shopIcon.addEventListener('click', clickShopIcon);
 let shopItems = [
-  { price: 5 },
-  { price: 10 },
-  { price: 15 },
-  { price: 20 },
-  { price: 25 },
-  { price: 30 },
+  {
+    price: 5,
+    quantity: Infinity,
+  },
+  {
+    price: 10,
+    quantity: 1,
+  },
+  {
+    price: 15,
+    quantity: 1,
+  },
+  {
+    price: 20,
+    quantity: 1,
+  },
+  {
+    price: 25,
+    quantity: 1,
+  },
+  {
+    price: 30,
+    quantity: 1,
+  },
 ];
-shopItems = buildShopItems(shopItems);;
+shopItems = buildShopItems(shopItems);
 const buyBtn = document.getElementById('buy-btn');
 buyBtn.addEventListener('click', buyItem);
 let activeShopItem = null;
@@ -26,97 +44,95 @@ let money = 0;
 let achievements = [
   {
     title: 'A Journey of a Thousand Clicks Starts With a Single Click',
-    clicks: 1
+    clicks: 1,
   },
   {
-    title: 'What\'s A Skinner Box?',
-    clicks: 15
+    title: "What's A Skinner Box?",
+    clicks: 15,
   },
   {
     title: 'This Is A Skinner Box',
-    clicks: 40
+    clicks: 40,
   },
   {
     title: 'The Conditioning Begins',
-    clicks: 75
+    clicks: 75,
   },
   {
     title: 'Nothing Beats Watching Numbers Go Up',
-    clicks: 150
+    clicks: 150,
   },
   {
-    title: 'What\'s The Money For, Anyway?',
-    clicks: 225
+    title: "What's The Money For, Anyway?",
+    clicks: 225,
   },
   {
-    title: 'It\'s Not Too Late To Quit',
-    clicks: 300
+    title: "It's Not Too Late To Quit",
+    clicks: 300,
   },
   {
-    title: 'It\'s A Nice Day Outside',
-    clicks: 400
+    title: "It's A Nice Day Outside",
+    clicks: 400,
   },
   {
-    title: 'Your Friends And Family Are Worried',
-    clicks: 500
+    title: 'Your Family and Friends Are Worried',
+    clicks: 500,
   },
   {
     title: 'Your Pet Needs Food',
-    clicks: 600
+    clicks: 600,
   },
   {
     title: 'Have You Eaten Yet?',
-    clicks: 700
+    clicks: 700,
   },
   {
-    title: 'Don\'t Forget About Your Laundry',
-    clicks: 800
+    title: "Don't Forget About Your Laundry",
+    clicks: 800,
   },
   {
-    title: 'Maybe It\'s Time For Bed',
-    clicks: 900
+    title: "Maybe It's Time For Bed",
+    clicks: 900,
   },
   {
     title: 'The Big 1k',
-    clicks: 1000
+    clicks: 1000,
   },
   {
-    title: 'I\'m Sorry For Creating This',
-    clicks: 1100
+    title: "I'm Sorry For Creating This",
+    clicks: 1100,
   },
   {
     title: 'What Have I Done?',
-    clicks: 1200
+    clicks: 1200,
   },
   {
     title: 'Too Late To Turn Back Now',
-    clicks: 1300
+    clicks: 1300,
   },
   {
     title: 'The Final Stretch',
-    clicks: 1400
+    clicks: 1400,
   },
   {
     title: 'The End! Thank You For Playing',
-    clicks: 1500
+    clicks: 1500,
   },
   {
     title: 'No, Really. There Is No Need To Continue',
-    clicks: 1600
+    clicks: 1600,
   },
   {
-    title: 'Guess I Can\'t Stop You',
-    clicks: 1700
+    title: "Guess I Can't Stop You",
+    clicks: 1700,
   },
   {
     // Don't you dare go for this one
     title: 'A Man Chooses, A Slave Obeys',
-    clicks: 10000
-  }
+    clicks: 10000,
+  },
 ];
 achievements = buildAchievementCards(achievements);
-
-
 
 // ========
 // Functions
@@ -128,10 +144,10 @@ function clickBox(e) {
   money++;
   const el = e.target;
   const newEl = el.cloneNode(true);
-  newEl.className = "box " + animation;
+  newEl.className = 'box ' + animation;
   newEl.addEventListener('click', clickBox);
   el.parentNode.replaceChild(newEl, el);
-  animation = (animation == 'shake' ? 'shake2' : 'shake');
+  animation = animation == 'shake' ? 'shake2' : 'shake';
   moneyDisplay.innerHTML = money;
 
   displayPopup('+1', e.clientX, e.clientY, 500);
@@ -144,13 +160,14 @@ function displayPopup(text, mouseX, mouseY, ms) {
   const popup = document.createElement('div');
   popup.classList.add('popup');
   popup.style.animationDuration = `${ms}ms`;
-  popup.style.top = mouseY - 40 + "px";
-  popup.style.left = mouseX - 20 + "px";
+  popup.style.top = mouseY - 40 + 'px';
+  popup.style.left = mouseX - 20 + 'px';
 
   const textElement = document.createElement('div');
   textElement.innerHTML = text;
   const random = Math.floor(Math.random() * 10) - 5;
-  textElement.style.transform = "rotate(" + random + "deg) translatex(" + random + "px)";
+  textElement.style.transform =
+    'rotate(' + random + 'deg) translatex(' + random + 'px)';
 
   popup.appendChild(textElement);
   document.body.appendChild(popup);
@@ -158,13 +175,13 @@ function displayPopup(text, mouseX, mouseY, ms) {
   setTimeout(function() {
     const parent = popup.parentNode;
     parent.removeChild(popup);
-  }, ms)
+  }, ms);
 }
 
 // Checks counter for achievements criteria
 function checkCounter() {
   for (const achievement of achievements) {
-    if (counter == achievement.clicks){
+    if (counter == achievement.clicks) {
       displayAchievement(achievement.card);
       return;
     }
