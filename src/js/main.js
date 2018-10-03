@@ -1,3 +1,6 @@
+console.log('asdf');
+
+
 // ========
 // Globals
 // ========
@@ -6,10 +9,19 @@ box.addEventListener('click', clickBox);
 const moneyDisplay = document.getElementById('money');
 const achievementsList = document.getElementById('achievements-list');
 const shopIcon = document.getElementsByClassName('shop-icon')[0];
+const shopItemList = document.querySelector('.shop-item-list');
 shopIcon.addEventListener('click', clickShopIcon);
-const catalogItems = document.getElementsByClassName('catalog-item');
-[...catalogItems].forEach(item => {
-  item.addEventListener('click', clickCatalogItem);
+let shopItems = [
+  { price: 5 },
+  { price: 10 },
+  { price: 15 },
+  { price: 20 },
+  { price: 25 },
+  { price: 30 },
+];
+shopItems = buildShopItems(shopItems);
+shopItems.forEach(item => {
+  item.addEventListener('click', clickShopItem);
 });
 const buyBtn = document.getElementById('buy-btn');
 buyBtn.addEventListener('click', buyItem);
@@ -101,6 +113,8 @@ let achievements = [
   }
 ];
 achievements = buildAchievementCards(achievements);
+
+
 
 // ========
 // Functions
@@ -214,7 +228,7 @@ function clickShopIcon(e) {
   shopWrapper.classList.toggle('active');
 }
 
-function clickCatalogItem(e) {
+function clickShopItem(e) {
   if (activeShopItem) activeShopItem.classList.remove('active');
   if (e.target == activeShopItem) {
     activeShopItem = null;
@@ -227,7 +241,10 @@ function clickCatalogItem(e) {
 }
 
 function checkItemPrice() {
-  if (!activeShopItem) return;
+  if (!activeShopItem) {
+    buyBtn.disabled = true;
+    return;
+  }
 
   const price = activeShopItem.dataset.price;
   if (price <= money) {
@@ -244,4 +261,18 @@ function buyItem(e) {
   displayPopup(`-$${activeShopItem.dataset.price}`, e.clientX, e.clientY, 1000);
   checkCounter();
   checkItemPrice();
+}
+
+function buildShopItems(array) {
+  const shopItems = array.map(item => {
+    const li = document.createElement('li');
+    li.classList.add('shop-item');
+    li.dataset.price = item.price;
+    li.textContent = `$${item.price}`;
+    return li;
+  });
+  shopItems.forEach(item => {
+    shopItemList.appendChild(item);
+  });
+  return shopItems;
 }

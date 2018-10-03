@@ -117,27 +117,25 @@ body {
 // Popups
 .popup {
   font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
-  font-size: 2em;
+  font-size: 2.5em;
   font-weight: bold;
 
   position: fixed;
 
   user-select: none;
   animation: hoverUp forwards;
+  pointer-events: none;
 
   -webkit-text-fill-color: white;
-  -webkit-text-stroke-width: .5px;
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: $color--primary-dark;
-
-  &:hover {
-    cursor: default;
-  }
 }
 
 // ========
 // Shopping
 // ========
 
+$background--shop: #ddd;
 $width--shop: 250px;
 $width--shop-icon: 50px;
 
@@ -150,14 +148,21 @@ $width--shop-icon: 50px;
 
   transition: transform .3s ease;
 
+  border-radius: 0 0 10px 10px;
+  background-color: $background--shop;
+
   will-change: transform;
+
+  &.active {
+    transform: translateX($width--shop);
+  }
+
+  .shop {
+    padding: 15px;
+  }
 
   h1 {
     margin-top: 0;
-  }
-
-  &.active {
-    transform: translatex($width--shop);
   }
 
   .shop-icon {
@@ -167,20 +172,15 @@ $width--shop-icon: 50px;
     width: 50px;
     height: 50px;
 
-    background-color: #ccc;
+    border-radius: 0 0 10px 0;
+    background-color: #ddd;
 
     &:hover {
       cursor: pointer;
     }
   }
 
-  .shop {
-    padding: 15px;
-
-    background-color: #ccc;
-  }
-
-  .catalog {
+  .shop-item-list {
     display: flex;
     flex-wrap: wrap;
 
@@ -188,15 +188,24 @@ $width--shop-icon: 50px;
     padding: 0;
 
     list-style: none;
+    justify-content: space-between;
+
 
     li {
+      font-size: 1.25rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       width: 65px;
       height: 65px;
-      margin: 0 8px 8px 0;
+      margin: 4px;
 
+      user-select: none;
       transition: all 300ms -125ms;
 
-      background-color: #ddd;
+      background-color: #e5e5e5;
 
       &.active {
         transform: scale(1.05, 1.05);
@@ -208,30 +217,32 @@ $width--shop-icon: 50px;
         cursor: pointer;
       }
     }
+  }
 
-    &:after {
-      display: table;
-      clear: both;
+  .shop-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 
-      content: '';
-    }
+    height: 65px;
+    padding: 0 15px 15px;
   }
 
   #buy-btn {
-    font-size: 1rem;
+    font-size: 1.25rem;
 
-    display: block;
+    height: 50px;
+    padding: .75rem 1.5rem;
 
-    margin: 0 0 0 auto;
-    padding: .5rem 1.25rem;
+    transition: all .25s -.1s;
 
     border: 0;
-    border-bottom: 2px solid mix($color--primary, #000, 85%);
+    border-bottom: 4px solid mix($color--primary, #000, 85%);
     background-color: $color--primary;
 
     &:disabled {
-      border-bottom: 2px solid rgba(#000, .15);
-      background-color: #ddd;
+      border-bottom: 4px solid rgba(#000, .25);
+      background-color: #ccc;
     }
 
     &:hover {
@@ -239,7 +250,7 @@ $width--shop-icon: 50px;
     }
 
     &:active {
-      margin-top: 2px;
+      margin-top: 4px;
 
       border: 0;
     }
