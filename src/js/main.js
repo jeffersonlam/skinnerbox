@@ -10,34 +10,39 @@ const shopItemList = document.querySelector('.shop-item-list');
 shopIcon.addEventListener('click', clickShopIcon);
 let shopItems = [
   {
+    price: 1,
+    name: 'Make it Rain $1',
+    description: 'A little fun never hurt anyone.',
+  },
+  {
     price: 5,
-    quantity: Infinity,
+    name: 'Make it Rain $5',
+    description: 'More fun for everyone!',
   },
   {
     price: 10,
-    quantity: 1,
-  },
-  {
-    price: 15,
-    quantity: 1,
+    name: 'Make it Rain $10',
+    description: 'You could buy a meal with that.',
   },
   {
     price: 20,
-    quantity: 1,
+    name: 'Make it Rain $20',
+    description: "That's two meals worth of money.",
   },
   {
-    price: 25,
-    quantity: 1,
+    price: 50,
+    name: 'Make it Rain $50',
+    description: "You sure you don't want to do anything else with that money?",
   },
   {
-    price: 30,
-    quantity: 1,
+    price: 100,
+    name: 'Make it Rain $100',
+    description: 'You could invest it instead, you know.',
   },
 ];
 shopItems = buildShopItems(shopItems);
 const buyBtn = document.getElementById('buy-btn');
 buyBtn.addEventListener('click', buyItem);
-let activeShopItem = null;
 let animation = 'shake';
 let counter = 0;
 let money = 0;
@@ -133,6 +138,9 @@ let achievements = [
   },
 ];
 achievements = buildAchievementCards(achievements);
+
+activeShopItem = shopItems[0];
+shopItems[0].html.dispatchEvent(new Event('click'));
 
 // ========
 // Functions
@@ -239,15 +247,28 @@ function clickShopIcon(e) {
 }
 
 function clickShopItem(e) {
-  if (activeShopItem) activeShopItem.classList.remove('active');
   if (e.target == activeShopItem) {
-    activeShopItem = null;
-  } else {
-    activeShopItem = e.target;
-    activeShopItem.classList.add('active');
+    return;
   }
+  activeShopItem.html.classList.remove('active');
+  activeShopItem = shopItems.find(item => item.html == e.target);
+  activeShopItem.html.classList.add('active');
 
+  setActiveItem();
   checkItemPrice();
+}
+
+function setActiveItem() {
+  const name = document.querySelector('.item-name');
+  const description = document.querySelector('.item-description');
+
+  if (!activeShopItem) {
+    name.textContent = '';
+    description.textContent = '';
+  } else {
+    name.textContent = activeShopItem.name;
+    description.textContent = activeShopItem.description;
+  }
 }
 
 function checkItemPrice() {
@@ -256,7 +277,7 @@ function checkItemPrice() {
     return;
   }
 
-  const price = activeShopItem.dataset.price;
+  const price = activeShopItem.price;
   if (price <= money) {
     buyBtn.disabled = false;
   } else {
@@ -265,25 +286,25 @@ function checkItemPrice() {
 }
 
 function buyItem(e) {
-  money -= activeShopItem.dataset.price;
+  money -= activeShopItem.price;
   moneyDisplay.innerHTML = money;
 
-  displayPopup(`-$${activeShopItem.dataset.price}`, e.clientX, e.clientY, 1000);
+  displayPopup(`-$${activeShopItem.price}`, e.clientX, e.clientY, 1000);
   checkCounter();
   checkItemPrice();
 }
 
-function buildShopItems(array) {
-  const shopItems = array.map(item => {
-    const li = document.createElement('li');
-    li.classList.add('shop-item');
-    li.dataset.price = item.price;
-    li.textContent = `$${item.price}`;
-    return li;
-  });
+function buildShopItems(shopItems) {
   shopItems.forEach(item => {
-    shopItemList.appendChild(item);
-    item.addEventListener('click', clickShopItem);
+    const html = document.createElement('li');
+    html.classList.add('shop-item');
+    html.dataset.price = item.price;
+    html.textContent = `$${item.price}`;
+    item.html = html;
+
+    shopItemList.appendChild(html);
+    html.addEventListener('click', clickShopItem);
   });
+
   return shopItems;
 }
