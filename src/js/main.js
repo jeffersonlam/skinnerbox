@@ -25,8 +25,16 @@ let counter = 0;
 let money = 0;
 let achievements = [
   {
+    title: 'A Journey of a Thousand Clicks Starts With a Single Click',
+    clicks: 1
+  },
+  {
     title: 'What\'s A Skinner Box?',
-    clicks: 10
+    clicks: 15
+  },
+  {
+    title: 'This Is A Skinner Box',
+    clicks: 40
   },
   {
     title: 'The Conditioning Begins',
