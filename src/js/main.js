@@ -16,10 +16,7 @@ let shopItems = [
   { price: 25 },
   { price: 30 },
 ];
-shopItems = buildShopItems(shopItems);
-shopItems.forEach(item => {
-  item.addEventListener('click', clickShopItem);
-});
+shopItems = buildShopItems(shopItems);;
 const buyBtn = document.getElementById('buy-btn');
 buyBtn.addEventListener('click', buyItem);
 let activeShopItem = null;
@@ -194,28 +191,22 @@ function wait(time) {
 // Builds achievement cards for achievement array
 function buildAchievementCards(achievements) {
   achievements.forEach(achievement => {
-    achievement.card = buildCard(achievement.title);
+    achievement.card = buildCard(achievement);
   });
   return achievements;
 }
 
 // Creates HTML for achievement card
-function buildCard(title) {
+function buildCard(achievement) {
   const card = document.createElement('li');
   card.classList.add('achievement-card');
-  const content = document.createElement('div');
-  content.classList.add('content');
-  const heading = document.createElement('h5');
-  heading.innerHTML = "Achievement unlocked!";
-  const body = document.createElement('h4');
-  body.innerHTML = title;
-  const img = document.createElement('img');
-  img.src = 'http://lorempixel.com/75/75/animals/?' + Math.floor(Math.random() * 1000);
-
-  content.appendChild(img);
-  content.appendChild(heading);
-  content.appendChild(body);
-  card.appendChild(content);
+  card.innerHTML = `
+    <div class="content">
+      <img src="https://placeimg.com/75/75/animals" />
+      <h5>Achievement unlocked!</h5>
+      <h4>${achievement.title}</h4>
+    </div>
+  `;
 
   return card;
 }
@@ -270,6 +261,7 @@ function buildShopItems(array) {
   });
   shopItems.forEach(item => {
     shopItemList.appendChild(item);
+    item.addEventListener('click', clickShopItem);
   });
   return shopItems;
 }
