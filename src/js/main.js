@@ -15,6 +15,11 @@ let shopItems = [
     description: 'A little fun never hurt anyone.',
   },
   {
+    price: 2,
+    name: 'Make it Rain $2',
+    description: 'Twice the fun.',
+  },
+  {
     price: 5,
     name: 'Make it Rain $5',
     description: 'More fun for everyone!',
@@ -28,16 +33,6 @@ let shopItems = [
     price: 20,
     name: 'Make it Rain $20',
     description: "That's two meals worth of money.",
-  },
-  {
-    price: 50,
-    name: 'Make it Rain $50',
-    description: "You sure you don't want to do anything else with that money?",
-  },
-  {
-    price: 100,
-    name: 'Make it Rain $100',
-    description: 'You could invest it instead, you know.',
   },
 ];
 shopItems = buildShopItems(shopItems);
@@ -138,6 +133,11 @@ let achievements = [
   },
 ];
 achievements = buildAchievementCards(achievements);
+
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 activeShopItem = shopItems[0];
 shopItems[0].html.dispatchEvent(new Event('click'));
@@ -292,6 +292,7 @@ function buyItem(e) {
   displayPopup(`-$${activeShopItem.price}`, e.clientX, e.clientY, 1000);
   checkCounter();
   checkItemPrice();
+  makeItRain(activeShopItem.price);
 }
 
 function buildShopItems(shopItems) {
@@ -308,3 +309,38 @@ function buildShopItems(shopItems) {
 
   return shopItems;
 }
+
+// =======
+// Canvas
+// =======
+const rainingMoney = [];
+ctx.font = '50px serif';
+
+function makeItRain(num) {
+  for (let i = 0; i < num; i++) {
+    const rain = {
+      text: '💸',
+      x: 40 + (Math.random() * window.innerWidth - 40),
+      y: -10 - (Math.random() * window.innerHeight / 10),
+    };
+
+    rainingMoney.push(rain);
+  }
+}
+
+function moveRain() {
+  for (const rain of rainingMoney) {
+    ctx.fillText(rain.text, rain.x, rain.y);
+    rain.y += 3 + Math.random() * 5;
+    if (rain.y > window.innerHeight + 50) {
+      rainingMoney.splice(rainingMoney.indexOf(rain), 1);
+    }
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  moveRain();
+  window.requestAnimationFrame(draw);
+}
+draw();
