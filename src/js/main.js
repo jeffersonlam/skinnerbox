@@ -203,14 +203,14 @@ function displayAchievement(achievementCard) {
   //Display achievement
   achievementCard.classList.add('popIn');
 
-  wait(6000)
+  wait(5000)
     .then(() => {
       achievementCard.classList.add('popOut');
-      return wait(600);
+      return wait(800);
     })
     .then(() => {
       achievementCard.classList.add('minimizeOut');
-      return wait(1000);
+      return wait(800);
     })
     .then(() => {
       achievementCard.parentNode.removeChild(achievementCard);
