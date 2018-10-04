@@ -206,11 +206,11 @@ function displayAchievement(achievementCard) {
   wait(5000)
     .then(() => {
       achievementCard.classList.add('popOut');
-      return wait(800);
+      return wait(700);
     })
     .then(() => {
       achievementCard.classList.add('minimizeOut');
-      return wait(800);
+      return wait(500);
     })
     .then(() => {
       achievementCard.parentNode.removeChild(achievementCard);

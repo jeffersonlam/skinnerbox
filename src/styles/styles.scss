@@ -49,11 +49,11 @@ body {
   }
 
   &.shake {
-    animation: shake .3s;
+    animation: shake .4s -.05s;
   }
 
   &.shake2 {
-    animation: shake2 .3s;
+    animation: shake2 .4s -.05s;
   }
 }
 
@@ -80,6 +80,7 @@ body {
   list-style: none;
 
   opacity: 0;
+  margin-bottom: 10px;
 }
 
 .achievement-card {
@@ -88,7 +89,6 @@ body {
   width: 300px;
   height: 100px;
   padding: 10px;
-  margin-bottom: 10px;
 
   border-radius: 50px;
   background-color: $color--primary;
@@ -287,15 +287,15 @@ $width--shop-icon: 50px;
 // Animations
 // ========
 .popIn {
-  animation: popIn .8s forwards;
+  animation: popIn .7s forwards;
 }
 
 .popOut {
-  animation: popOut .8s forwards;
+  animation: popOut .7s forwards;
 }
 
 .minimizeOut {
-  animation: minimizeOut .6s forwards;
+  animation: minimizeOut .5s forwards;
 }
 
 @keyframes shake {
@@ -391,6 +391,7 @@ $width--shop-icon: 50px;
     overflow: hidden;
 
     max-height: 0;
+    margin: 0;
   }
 }
 
