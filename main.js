@@ -48,7 +48,7 @@ let achievements = [
   },
   {
     title: "What's A Skinner Box?",
-    clicks: 2,
+    clicks: 15,
   },
   {
     title: 'This Is A Skinner Box',
