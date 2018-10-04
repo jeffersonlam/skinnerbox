@@ -21,9 +21,9 @@ body {
   #box:hover {
     cursor: pointer; }
   #box.shake {
-    animation: shake .3s; }
+    animation: shake .4s -.05s; }
   #box.shake2 {
-    animation: shake2 .3s; }
+    animation: shake2 .4s -.05s; }
 
 .hud {
   margin-top: 25px; }
@@ -37,14 +37,14 @@ body {
 
 .achievement-container {
   list-style: none;
-  opacity: 0; }
+  opacity: 0;
+  margin-bottom: 10px; }
 
 .achievement-card {
   display: flex;
   width: 300px;
   height: 100px;
   padding: 10px;
-  margin-bottom: 10px;
   border-radius: 50px;
   background-color: #ffd54f; }
   .achievement-card img {
@@ -156,13 +156,13 @@ body {
       border: 0; }
 
 .popIn {
-  animation: popIn .8s forwards; }
+  animation: popIn .7s forwards; }
 
 .popOut {
-  animation: popOut .8s forwards; }
+  animation: popOut .7s forwards; }
 
 .minimizeOut {
-  animation: minimizeOut .6s forwards; }
+  animation: minimizeOut .5s forwards; }
 
 @keyframes shake {
   0%,
@@ -216,7 +216,8 @@ body {
     max-height: 100px; }
   100% {
     overflow: hidden;
-    max-height: 0; } }
+    max-height: 0;
+    margin: 0; } }
 
 @keyframes hoverUp {
   0% {
