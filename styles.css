@@ -36,15 +36,15 @@ body {
   padding: 0; }
 
 .achievement-container {
-  margin-bottom: 10px;
   list-style: none;
   opacity: 0; }
 
 .achievement-card {
   display: flex;
-  width: 350px;
+  width: 300px;
   height: 100px;
   padding: 10px;
+  margin-bottom: 10px;
   border-radius: 50px;
   background-color: #ffd54f; }
   .achievement-card img {
@@ -57,12 +57,12 @@ body {
     margin-left: 10px;
     color: #212121; }
     .achievement-card .content h5 {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 100;
       margin: 0; }
     .achievement-card .content h4 {
       font-family: 'Avenir';
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 500;
       margin: 5px 0 0 0; }
 
@@ -216,8 +216,7 @@ body {
     max-height: 100px; }
   100% {
     overflow: hidden;
-    max-height: 0;
-    padding: 0; } }
+    max-height: 0; } }
 
 @keyframes hoverUp {
   0% {
