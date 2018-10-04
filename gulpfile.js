@@ -5,6 +5,7 @@ const sass = require('gulp-sass');
 const babel = require('gulp-babel');
 const browserSync = require('browser-sync');
 const reload = browserSync.reload;
+const deploy = require('gulp-gh-pages');
 
 gulp.task('default', ['sass', 'sass:watch', 'html', 'html:watch', 'js', 'js:watch', 'browser-sync']);
 
@@ -46,4 +47,9 @@ gulp.task('browser-sync', function() {
       },
       open: false
   });
+});
+
+gulp.task('deploy', function () {
+  return gulp.src("./dist/**/*")
+    .pipe(deploy())
 });
