@@ -156,13 +156,13 @@ body {
       border: 0; }
 
 .popIn {
-  animation: popIn .6s forwards; }
+  animation: popIn .8s forwards; }
 
 .popOut {
-  animation: popOut .6s forwards; }
+  animation: popOut .8s forwards; }
 
 .minimizeOut {
-  animation: minimizeOut .3s forwards; }
+  animation: minimizeOut .6s forwards; }
 
 @keyframes shake {
   0%,
