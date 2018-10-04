@@ -331,7 +331,7 @@ function makeItRain(num) {
 function moveRain() {
   for (const rain of rainingMoney) {
     ctx.fillText(rain.text, rain.x, rain.y);
-    rain.y += 3 + Math.random() * 5;
+    rain.y += 2 + Math.random() * 4;
     if (rain.y > window.innerHeight + 50) {
       rainingMoney.splice(rainingMoney.indexOf(rain), 1);
     }
