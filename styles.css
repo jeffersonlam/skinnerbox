@@ -1,4 +1,5 @@
 * {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 html,
@@ -8,9 +9,18 @@ body {
   margin: 0; }
 
 .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   height: 100%; }
 
@@ -21,8 +31,10 @@ body {
   #box:hover {
     cursor: pointer; }
   #box.shake {
+    -webkit-animation: shake .4s -.05s;
     animation: shake .4s -.05s; }
   #box.shake2 {
+    -webkit-animation: shake2 .4s -.05s;
     animation: shake2 .4s -.05s; }
 
 .hud {
@@ -41,6 +53,8 @@ body {
   margin-bottom: 10px; }
 
 .achievement-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 300px;
   height: 100px;
@@ -52,7 +66,12 @@ body {
     height: 80px;
     border-radius: 50%; }
   .achievement-card .content {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     margin-left: 10px;
     color: #212121; }
@@ -71,7 +90,11 @@ body {
   font-size: 2.5em;
   font-weight: bold;
   position: fixed;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
+  -webkit-animation: hoverUp forwards;
   animation: hoverUp forwards;
   pointer-events: none;
   -webkit-text-fill-color: white;
@@ -83,11 +106,15 @@ body {
   top: 0;
   left: -250px;
   width: 250px;
+  -webkit-transition: -webkit-transform .3s ease;
+  transition: -webkit-transform .3s ease;
   transition: transform .3s ease;
+  transition: transform .3s ease, -webkit-transform .3s ease;
   border-radius: 0 0 10px 10px;
   background-color: #ddd;
   will-change: transform; }
   #shop-wrapper.active {
+    -webkit-transform: translateX(250px);
     transform: translateX(250px); }
   #shop-wrapper .shop {
     padding: 15px; }
@@ -103,23 +130,37 @@ body {
     #shop-wrapper .shop-icon:hover {
       cursor: pointer; }
   #shop-wrapper .shop-item-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
     list-style: none; }
     #shop-wrapper .shop-item-list li {
       font-size: 1.25rem;
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
       align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
       justify-content: center;
       width: 65px;
       height: 65px;
       margin: 4px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
       user-select: none;
+      -webkit-transition: all 300ms -125ms;
       transition: all 300ms -125ms;
       background-color: #eee; }
       #shop-wrapper .shop-item-list li.active {
+        -webkit-transform: scale(1.1, 1.1);
         transform: scale(1.1, 1.1);
         background-color: #fff; }
       #shop-wrapper .shop-item-list li:hover {
@@ -134,14 +175,21 @@ body {
     #shop-wrapper .shop-info .item-description {
       margin: 10px 0 0 0; }
   #shop-wrapper .shop-actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
     justify-content: flex-end;
     height: 65px; }
   #shop-wrapper #buy-btn {
     font-size: 1.25rem;
     height: 50px;
     padding: .75rem 1.5rem;
+    -webkit-transition: all .25s -.1s;
     transition: all .25s -.1s;
     border: 0;
     border-bottom: 4px solid #d9b543;
@@ -156,59 +204,141 @@ body {
       border: 0; }
 
 .popIn {
+  -webkit-animation: popIn .7s forwards;
   animation: popIn .7s forwards; }
 
 .popOut {
+  -webkit-animation: popOut .7s forwards;
   animation: popOut .7s forwards; }
 
 .minimizeOut {
+  -webkit-animation: minimizeOut .5s forwards;
   animation: minimizeOut .5s forwards; }
+
+@-webkit-keyframes shake {
+  0%,
+  100% {
+    -webkit-transform: 0;
+    transform: 0;
+    background-color: #212121; }
+  10% {
+    -webkit-transform: rotate(6deg) translate3d(12px, -12px, 0) scale(0.95, 0.95);
+    transform: rotate(6deg) translate3d(12px, -12px, 0) scale(0.95, 0.95);
+    background-color: #e0e0e0; }
+  20% {
+    -webkit-transform: rotate(6deg) translate3d(15px, -12px, 0) scale(0.95, 0.95);
+    transform: rotate(6deg) translate3d(15px, -12px, 0) scale(0.95, 0.95);
+    background-color: #e0e0e0; } }
 
 @keyframes shake {
   0%,
   100% {
+    -webkit-transform: 0;
     transform: 0;
     background-color: #212121; }
   10% {
+    -webkit-transform: rotate(6deg) translate3d(12px, -12px, 0) scale(0.95, 0.95);
     transform: rotate(6deg) translate3d(12px, -12px, 0) scale(0.95, 0.95);
     background-color: #e0e0e0; }
   20% {
+    -webkit-transform: rotate(6deg) translate3d(15px, -12px, 0) scale(0.95, 0.95);
     transform: rotate(6deg) translate3d(15px, -12px, 0) scale(0.95, 0.95);
+    background-color: #e0e0e0; } }
+
+@-webkit-keyframes shake2 {
+  0%,
+  100% {
+    -webkit-transform: 0;
+    transform: 0;
+    background-color: #212121; }
+  10% {
+    -webkit-transform: rotate(-4deg) translate3d(-12px, -12px, 0) scale(0.9, 0.9);
+    transform: rotate(-4deg) translate3d(-12px, -12px, 0) scale(0.9, 0.9);
+    background-color: #e0e0e0; }
+  20% {
+    -webkit-transform: rotate(-4deg) translate3d(-15px, -12px, 0) scale(0.9, 0.9);
+    transform: rotate(-4deg) translate3d(-15px, -12px, 0) scale(0.9, 0.9);
     background-color: #e0e0e0; } }
 
 @keyframes shake2 {
   0%,
   100% {
+    -webkit-transform: 0;
     transform: 0;
     background-color: #212121; }
   10% {
+    -webkit-transform: rotate(-4deg) translate3d(-12px, -12px, 0) scale(0.9, 0.9);
     transform: rotate(-4deg) translate3d(-12px, -12px, 0) scale(0.9, 0.9);
     background-color: #e0e0e0; }
   20% {
+    -webkit-transform: rotate(-4deg) translate3d(-15px, -12px, 0) scale(0.9, 0.9);
     transform: rotate(-4deg) translate3d(-15px, -12px, 0) scale(0.9, 0.9);
     background-color: #e0e0e0; } }
 
-@keyframes popIn {
+@-webkit-keyframes popIn {
   0% {
+    -webkit-transform: none;
     transform: none;
     opacity: 0; }
   50% {
+    -webkit-transform: scale(1.05, 1.05);
     transform: scale(1.05, 1.05);
     opacity: 1; }
   100% {
+    -webkit-transform: none;
     transform: none;
     opacity: 1; } }
 
-@keyframes popOut {
+@keyframes popIn {
   0% {
+    -webkit-transform: none;
     transform: none;
-    opacity: 1; }
+    opacity: 0; }
   50% {
+    -webkit-transform: scale(1.05, 1.05);
     transform: scale(1.05, 1.05);
     opacity: 1; }
   100% {
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1; } }
+
+@-webkit-keyframes popOut {
+  0% {
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1; }
+  50% {
+    -webkit-transform: scale(1.05, 1.05);
+    transform: scale(1.05, 1.05);
+    opacity: 1; }
+  100% {
+    -webkit-transform: none;
     transform: none;
     opacity: 0; } }
+
+@keyframes popOut {
+  0% {
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1; }
+  50% {
+    -webkit-transform: scale(1.05, 1.05);
+    transform: scale(1.05, 1.05);
+    opacity: 1; }
+  100% {
+    -webkit-transform: none;
+    transform: none;
+    opacity: 0; } }
+
+@-webkit-keyframes minimizeOut {
+  0% {
+    overflow: hidden;
+    max-height: 100px; }
+  100% {
+    overflow: hidden;
+    max-height: 0;
+    margin: 0; } }
 
 @keyframes minimizeOut {
   0% {
@@ -219,14 +349,31 @@ body {
     max-height: 0;
     margin: 0; } }
 
-@keyframes hoverUp {
+@-webkit-keyframes hoverUp {
   0% {
+    -webkit-transform: none;
     transform: none;
     opacity: 1; }
   50% {
+    -webkit-transform: translatey(-20px);
     transform: translatey(-20px);
     opacity: 1; }
   100% {
+    -webkit-transform: translatey(-20px);
+    transform: translatey(-20px);
+    opacity: 0; } }
+
+@keyframes hoverUp {
+  0% {
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1; }
+  50% {
+    -webkit-transform: translatey(-20px);
+    transform: translatey(-20px);
+    opacity: 1; }
+  100% {
+    -webkit-transform: translatey(-20px);
     transform: translatey(-20px);
     opacity: 0; } }
 
