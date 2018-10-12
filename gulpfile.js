@@ -2,6 +2,7 @@
 
 const gulp = require('gulp');
 const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const browserSync = require('browser-sync');
 const reload = browserSync.reload;
@@ -12,6 +13,10 @@ gulp.task('default', ['sass', 'sass:watch', 'html', 'html:watch', 'js', 'js:watc
 gulp.task('sass', function () {
   return gulp.src('./src/styles/**/*.scss')
     .pipe(sass.sync().on('error', sass.logError))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
     .pipe(reload({stream:true}))
     .pipe(gulp.dest('./dist'));
 });
