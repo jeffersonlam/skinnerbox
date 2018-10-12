@@ -32,6 +32,9 @@ gulp.task('html:watch', function() {
 
 gulp.task('js', function() {
   gulp.src('./src/js/*.js')
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
     .pipe(reload({stream:true}))
     .pipe(gulp.dest('dist'));
 });
@@ -45,7 +48,8 @@ gulp.task('browser-sync', function() {
       server: {
           baseDir: 'dist/'
       },
-      open: false
+      open: false,
+      notify: false
   });
 });
 
