@@ -313,7 +313,6 @@ function buildShopItems(shopItems) {
 // Canvas
 // =======
 const rainingMoney = [];
-ctx.font = '50px serif';
 
 function makeItRain(num) {
   for (let i = 0; i < num; i++) {
@@ -338,8 +337,11 @@ function moveRain() {
 }
 
 function draw() {
-  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  ctx.canvas.width = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
+  ctx.font = '50px serif';
   moveRain();
   window.requestAnimationFrame(draw);
 }
+
 draw();
