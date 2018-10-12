@@ -138,8 +138,7 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
-activeShopItem = shopItems[0];
+let activeShopItem = shopItems[0];
 shopItems[0].html.dispatchEvent(new Event('click'));
 
 // ========
