@@ -110,7 +110,7 @@ var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-activeShopItem = shopItems[0];
+var activeShopItem = shopItems[0];
 shopItems[0].html.dispatchEvent(new Event('click')); // ========
 // Functions
 // ========
@@ -288,7 +288,6 @@ function buildShopItems(shopItems) {
 
 
 var rainingMoney = [];
-ctx.font = '50px serif';
 
 function makeItRain(num) {
   for (var i = 0; i < num; i++) {
@@ -314,7 +313,9 @@ function moveRain() {
 }
 
 function draw() {
-  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  ctx.canvas.width = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
+  ctx.font = '50px serif';
   moveRain();
   window.requestAnimationFrame(draw);
 }
